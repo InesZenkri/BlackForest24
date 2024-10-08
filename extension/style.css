@@ -1,0 +1,152 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    width: 300px;
+    background-color: #f4f4f4;
+}
+
+.container {
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    width: 60px;
+    height: auto;
+    margin-right: 5px;
+}
+
+.tagline {
+    font-size: 18px;
+    color: #333;
+}
+
+.settings {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.setting {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 34px;
+    height: 20px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #126ccd;
+    transition: 0.4s;
+    border-radius: 20px;
+}
+
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #f7ec1c;
+}
+
+input:checked + .slider:before {
+    transform: translateX(14px);
+}
+
+button {
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #003c82;
+}
+
+.toggle-status {
+    font-size: 12px;
+    color: #555;
+    margin-left: 8px;
+    display: inline-block;
+    min-width: 30px;
+}
+
+.divider {
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 10px 0;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-around;
+}
+
+.footer-option {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: #4b4b4b; 
+    transition: color 0.3s ease; 
+}
+
+.footer-option:hover {
+    color: #1c6ee9;
+}
+
+.footer-icon .icon {
+    width: 20px; 
+    height: 20px; 
+    stroke: currentColor; 
+    fill: none; 
+    transition: stroke 0.3s ease; 
+    margin:2px;
+}
+
+
+.icon path {
+    stroke: currentColor; 
+}
