@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="cleaned_article_info">
+  <database-model serializer="dbm" dbms="SQLITE" family-id="SQLITE" format-version="4.51">
+    <root id="1">
+      <ServerVersion>3.45.1</ServerVersion>
+    </root>
+    <schema id="2" parent="1" name="main">
+      <Current>1</Current>
+      <LastIntrospectionLocalTimestamp>2024-10-11.22:43:48</LastIntrospectionLocalTimestamp>
+    </schema>
+    <table id="3" parent="2" name="sqlite_master">
+      <System>1</System>
+    </table>
+    <column id="4" parent="3" name="type">
+      <DasType>TEXT|0s</DasType>
+      <Position>1</Position>
+    </column>
+    <column id="5" parent="3" name="name">
+      <DasType>TEXT|0s</DasType>
+      <Position>2</Position>
+    </column>
+    <column id="6" parent="3" name="tbl_name">
+      <DasType>TEXT|0s</DasType>
+      <Position>3</Position>
+    </column>
+    <column id="7" parent="3" name="rootpage">
+      <DasType>INT|0s</DasType>
+      <Position>4</Position>
+    </column>
+    <column id="8" parent="3" name="sql">
+      <DasType>TEXT|0s</DasType>
+      <Position>5</Position>
+    </column>
+  </database-model>
+</dataSource>

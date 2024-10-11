@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 # Connect to the database and perform a search
 def query_database(search_term):
-    conn = sqlite3.connect('edeka_products.db')
+    conn = sqlite3.connect('../data/cleaned_article_info1.db')
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM products WHERE name LIKE ?", ('%' + search_term + '%',))
     results = cursor.fetchall()
@@ -15,7 +15,7 @@ def query_database(search_term):
 
 def query_product_info(menu_item):
     # Connect to the database
-    conn = sqlite3.connect('edeka_products.db')
+    conn = sqlite3.connect('../data/edeka_products.db')
     cursor = conn.cursor()
 
     # Execute a SQL query to find the product info for the menu item
