@@ -6,7 +6,9 @@
 }
 
 body {
-    width: 300px;
+    width: 100%; /* Full width of the page */
+    max-width: 1200px; /* Optional, to keep it neat */
+    margin: auto; /* Center the container */
     background-color: #f4f4f4;
 }
 
@@ -17,7 +19,9 @@ body {
 .header {
     display: flex;
     align-items: center;
+    justify-content: space-between; /* Ensures elements are spaced correctly */
     margin-bottom: 20px;
+    width: 100%;
 }
 
 .logo {
@@ -31,11 +35,45 @@ body {
     color: #333;
 }
 
+.search-container {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.search-bar {
+    padding: 10px; /* Increase padding to make the search bar taller */
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+    width: 200px;
+    height: 40px; /* Explicit height to ensure consistency */
+}
+
+.search-button {
+    padding: 10px; /* Increase padding to match the height of the search bar */
+    font-size: 16px;
+    background-color: #126ccd;
+    color: white;
+    border: 1px solid #ccc;
+    #border-radius: 0 4px 4px 0;
+    border-radius: 4px 0 0 4px;
+    cursor: pointer;
+    height: 40px; /* Match the height of the search bar */
+}
+
+.search-button:hover {
+    background-color: #003c82;
+}
+
+
 .settings {
     background-color: white;
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 300px; /* Set a fixed width for better alignment */
+    margin-left: 0; /* Align the settings section to the left */
 }
 
 .setting {
@@ -69,7 +107,6 @@ body {
     transition: 0.4s;
     border-radius: 20px;
 }
-
 
 .slider:before {
     position: absolute;
@@ -122,15 +159,18 @@ button:hover {
 
 .footer {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column; /* Stack the footer options vertically */
+    align-items: flex-start; /* Align to the left side of the container */
+    margin-top: 20px; /* Add some space above the footer */
 }
 
 .footer-option {
     display: flex;
     align-items: center;
     cursor: pointer;
-    color: #4b4b4b; 
-    transition: color 0.3s ease; 
+    color: #4b4b4b;
+    transition: color 0.3s ease;
+    margin-bottom: 10px; /* Add spacing between footer options */
 }
 
 .footer-option:hover {
@@ -138,49 +178,14 @@ button:hover {
 }
 
 .footer-icon .icon {
-    width: 20px; 
-    height: 20px; 
-    stroke: currentColor; 
-    fill: none; 
-    transition: stroke 0.3s ease; 
-    margin:2px;
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    fill: none;
+    transition: stroke 0.3s ease;
+    margin: 2px;
 }
-
 
 .icon path {
-    stroke: currentColor; 
-}
-
-.search-bar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
-.search-bar form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
-.search-bar input[type="text"] {
-    width: 85%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    color: #888;
-}
-
-.search-bar button {
-    width: 50%;
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    background-color: #4CAF50;
-    color: white;
+    stroke: currentColor;
 }

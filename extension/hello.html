@@ -5,282 +5,66 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EDEKA Extension</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: Arial, sans-serif;
-    }
-
-    body {
-        width: 100%;
-        max-width: none; /* Allow full width */
-        margin: 0 auto; /* Center the body horizontally */
-        background-color: #f4f4f4;
-    }
-
-    .search-container {
-        width: 100%; /* Full width */
-        padding: 20px;
-        background-color: #fff;
-    }
-
-    .search-bar {
-        width: 100%; /* Full width */
-        display: flex;
-        justify-content: space-between; /* Align items across the width */
-        align-items: center;
-    }
-
-    .search-bar form {
-        width: 100%;
-        display: flex;
-        gap: 10px; /* Space between input and button */
-    }
-
-    .search-bar input[type="text"] {
-        width: 100%; /* Make input take full width */
-        padding: 10px;
-        font-size: 16px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        color: #888;
-        flex-grow: 1;
-    }
-
-    .search-bar button {
-        padding: 10px;
-        font-size: 16px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        background-color: #4CAF50;
-        color: white;
-        flex-shrink: 0;
-    }
-
-    .container {
-        padding: 20px;
-    }
-
-    .header {
-        display: flex;
-        align-items: center;
-        margin-bottom: 20px;
-    }
-
-    .logo {
-        width: 60px;
-        height: auto;
-        margin-right: 5px;
-    }
-
-    .tagline {
-        font-size: 18px;
-        color: #333;
-    }
-
-    .settings {
-        background-color: white;
-        padding: 15px;
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .setting {
-        margin-bottom: 10px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .switch {
-        position: relative;
-        display: inline-block;
-        width: 34px;
-        height: 20px;
-    }
-
-    .switch input {
-        opacity: 0;
-        width: 0;
-        height: 0;
-    }
-
-    .slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #126ccd;
-        transition: 0.4s;
-        border-radius: 20px;
-    }
-
-    .slider:before {
-        position: absolute;
-        content: "";
-        height: 14px;
-        width: 14px;
-        left: 3px;
-        bottom: 3px;
-        background-color: white;
-        transition: 0.4s;
-        border-radius: 50%;
-    }
-
-    input:checked + .slider {
-        background-color: #f7ec1c;
-    }
-
-    input:checked + .slider:before {
-        transform: translateX(14px);
-    }
-
-    button {
-        background-color: #0056b3;
-        color: white;
-        border: none;
-        padding: 10px;
-        width: 100%;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-top: 10px;
-    }
-
-    button:hover {
-        background-color: #003c82;
-    }
-
-    .toggle-status {
-        font-size: 12px;
-        color: #555;
-        margin-left: 8px;
-        display: inline-block;
-        min-width: 30px;
-    }
-
-    .divider {
-        height: 1px;
-        background-color: #e0e0e0;
-        margin: 10px 0;
-    }
-
-    .footer {
-        display: flex;
-        justify-content: space-around;
-    }
-
-    .footer-option {
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        color: #4b4b4b; 
-        transition: color 0.3s ease; 
-    }
-
-    .footer-option:hover {
-        color: #1c6ee9;
-    }
-
-    .footer-icon .icon {
-        width: 20px; 
-        height: 20px; 
-        stroke: currentColor; 
-        fill: none; 
-        transition: stroke 0.3s ease; 
-        margin:2px;
-    }
-
-    .icon path {
-        stroke: currentColor; 
-    }
-  </style>
 </head>
 <body>
-    <div class="search-container">
-        <div class="search-bar">
-            <form action="/search" method="POST">
-                <input type="text" name="search" placeholder="Search for a recipe">
-                <button type="submit">Search</button>
-            </form>
-        </div>
-    </div>
     <div class="container">
         <div class="header">
             <img src="Edeka-Logo.png" alt="EDEKA Logo" class="logo">
             <span class="tagline">Wir ♥ Lebensmittel</span>
-        </div>
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Search recipy...">
+                <button class="search-button">Search</button>
+            </div>
+          </div>
         <div class="divider"></div>
         <div class="settings">
-            <div class="setting">
-                <span>Bio Products</span>
-                <label class="switch">
-                    <input type="checkbox" id="bio-products">
-                    <span class="slider round"></span>
-                </label>
-            </div>
-            <div class="divider"></div>
-            <div class="setting">
-                <span>GUT&GÜNSTIG</span>
-                <label class="switch">
-                    <input type="checkbox" id="cheapest-products">
-                    <span class="slider round"></span>
-                </label>
-            </div>
-            <div class="divider"></div>
-            <div class="setting">
-                <span>Talahon</span>
-                <label class="switch">
-                    <input type="checkbox" id="talahon">
-                    <span class="slider round"></span>
-                </label>
-            </div>
-            <div class="divider"></div>
-            <button id="apply-button">Apply Preferences</button>
+        <div class="setting">
+          <span>Bio Products</span>
+          <label class="switch">
+            <input type="checkbox" id="bio-products">
+            <span class="slider round"></span>
+          </label>
         </div>
         <div class="divider"></div>
-        <div class="footer">
-            <div class="footer-option">
-                <div class="footer-icon">
-                    <svg class="icon" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6 12H18M12 6V18" stroke="#6f6f71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
-                </div>
-                <span>Add Preference</span>
-            </div>
-            <div class="footer-option">
-                <div class="footer-icon">
-                    <svg class="icon" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M15 14V17.6C15 18.4401 15 18.8601 14.8365 19.181C14.6927 19.4632 14.4632 19.6927 14.181 19.8365C13.8601 20 13.4401 20 12.6 20H7.40001C6.55994 20 6.1399 20 5.81903 19.8365C5.53679 19.6927 5.30731 19.4632 5.1635 19.181C5.00001 18.8601 5.00001 18.4401 5.00001 17.6V10M19 10V20M5.00001 16H15M5.55778 4.88446L3.5789 8.84223C3.38722 9.22559 3.29138 9.41727 3.3144 9.57308C3.3345 9.70914 3.40976 9.8309 3.52246 9.90973C3.65153 10 3.86583 10 4.29444 10H19.7056C20.1342 10 20.3485 10 20.4776 9.90973C20.5903 9.8309 20.6655 9.70914 20.6856 9.57308C20.7086 9.41727 20.6128 9.22559 20.4211 8.84223L18.4422 4.88446C18.2817 4.5634 18.2014 4.40287 18.0817 4.28558C17.9758 4.18187 17.8482 4.10299 17.7081 4.05465C17.5496 4 17.3701 4 17.0112 4H6.98887C6.62991 4 6.45043 4 6.29198 4.05465C6.15185 4.10299 6.02422 4.18187 5.91833 4.28558C5.79858 4.40287 5.71832 4.5634 5.55778 4.88446Z" stroke="#737373" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
-                </div>
-                <span>My E-Shop</span>
-            </div>
+        <div class="setting">
+          <span>GUT&GÜNSTIG</span>
+          <label class="switch">
+            <input type="checkbox" id="cheapest-products">
+            <span class="slider round"></span>
+          </label>
         </div>
+        <div class="divider"></div>
+        <div class="setting">
+            <span>Talahon</span>
+            <label class="switch">
+              <input type="checkbox"  id="talahon">
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div class="divider"></div>
+
+        <button id="apply-button">Apply Preferences</button>
+      </div>
+      <div class="divider"></div>
+
+      <div class="footer">
+        <div class="footer-option">
+            <div class="footer-icon">
+                <svg  class="icon" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6 12H18M12 6V18" stroke="#6f6f71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+            </div>
+            <span>Add Preference</span>
+        </div>
+
+        <div class="footer-option">
+            <div class="footer-icon">
+                <svg class="icon" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M15 14V17.6C15 18.4401 15 18.8601 14.8365 19.181C14.6927 19.4632 14.4632 19.6927 14.181 19.8365C13.8601 20 13.4401 20 12.6 20H7.40001C6.55994 20 6.1399 20 5.81903 19.8365C5.53679 19.6927 5.30731 19.4632 5.1635 19.181C5.00001 18.8601 5.00001 18.4401 5.00001 17.6V10M19 10V20M5.00001 16H15M5.55778 4.88446L3.5789 8.84223C3.38722 9.22559 3.29138 9.41727 3.3144 9.57308C3.3345 9.70914 3.40976 9.8309 3.52246 9.90973C3.65153 10 3.86583 10 4.29444 10H19.7056C20.1342 10 20.3485 10 20.4776 9.90973C20.5903 9.8309 20.6655 9.70914 20.6856 9.57308C20.7086 9.41727 20.6128 9.22559 20.4211 8.84223L18.4422 4.88446C18.2817 4.5634 18.2014 4.40287 18.0817 4.28558C17.9758 4.18187 17.8482 4.10299 17.7081 4.05465C17.5496 4 17.3701 4 17.0112 4H6.98887C6.62991 4 6.45043 4 6.29198 4.05465C6.15185 4.10299 6.02422 4.18187 5.91833 4.28558C5.79858 4.40287 5.71832 4.5634 5.55778 4.88446Z" stroke="#737373" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+            </div>
+        <span>My E-Shop</span>
+        </div>
+      </div>
+
     </div>
+
     <script src="popup.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-$(document).ready(function(){
-    $("form").on("submit", function(event){
-        event.preventDefault();
-
-        var searchTerm = $("input[name='search']").val();
-
-        $.ajax({
-            url: "/search",
-            type: "POST",
-            data: {
-                search: searchTerm
-            },
-            success: function(response){
-                // Display the search results
-                // This will depend on how you want to display the results
-                console.log(response);
-            }
-        });
-    });
-});
-</script>
-</body>
+  </body>
 </html>
