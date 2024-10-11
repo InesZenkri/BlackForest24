@@ -5,66 +5,193 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EDEKA Extension</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: none; /* Hidden by default */
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .popup {
+      width: 600px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+
+    .popup .section {
+      margin-bottom: 20px;
+    }
+
+    .popup h2 {
+      margin-top: 0;
+      font-size: 24px;
+    }
+
+    .product-list {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .product {
+      text-align: center;
+      width: 30%;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .product img {
+      width: 100px;
+      height: 100px;
+      border-radius: 5px;
+    }
+
+    .product p {
+      margin: 10px 0;
+      font-size: 14px;
+    }
+
+    .price {
+      font-weight: bold;
+      color: #333;
+    }
+
+    .checkbox {
+      margin-top: 5px;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <img src="Edeka-Logo.png" alt="EDEKA Logo" class="logo">
-            <span class="tagline">Wir ♥ Lebensmittel</span>
-            <div class="search-container">
-                <input type="text" class="search-bar" placeholder="Search recipy...">
-                <button class="search-button">Search</button>
-            </div>
-          </div>
-        <div class="divider"></div>
-        <div class="settings">
-        <div class="setting">
-          <span>Bio Products</span>
-          <label class="switch">
-            <input type="checkbox" id="bio-products">
-            <span class="slider round"></span>
-          </label>
-        </div>
-        <div class="divider"></div>
-        <div class="setting">
-          <span>GUT&GÜNSTIG</span>
-          <label class="switch">
-            <input type="checkbox" id="cheapest-products">
-            <span class="slider round"></span>
-          </label>
-        </div>
-        <div class="divider"></div>
-        <div class="setting">
-            <span>Talahon</span>
-            <label class="switch">
-              <input type="checkbox"  id="talahon">
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <div class="divider"></div>
+  <div class="container">
+    <div class="header">
+      <img src="Edeka-Logo.png" alt="EDEKA Logo" class="logo">
+      <span class="tagline">Wir ♥ Lebensmittel</span>
+      <div class="search-container">
+        <input type="text" class="search-bar" placeholder="Search recipe...">
+        <button class="search-button" onclick="showPopup()">Search</button>
+      </div>
+    </div>
+    <div class="divider"></div>
 
-        <button id="apply-button">Apply Preferences</button>
+    <div class="settings">
+      <div class="setting">
+        <span>Bio Products</span>
+        <label class="switch">
+          <input type="checkbox" id="bio-products">
+          <span class="slider round"></span>
+        </label>
+      </div>
+      <div class="divider"></div>
+      <div class="setting">
+        <span>GUT&GÜNSTIG</span>
+        <label class="switch">
+          <input type="checkbox" id="cheapest-products">
+          <span class="slider round"></span>
+        </label>
+      </div>
+      <div class="divider"></div>
+      <div class="setting">
+        <span>Talahon</span>
+        <label class="switch">
+          <input type="checkbox" id="talahon">
+          <span class="slider round"></span>
+        </label>
       </div>
       <div class="divider"></div>
 
-      <div class="footer">
-        <div class="footer-option">
-            <div class="footer-icon">
-                <svg  class="icon" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6 12H18M12 6V18" stroke="#6f6f71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
-            </div>
-            <span>Add Preference</span>
-        </div>
+      <button id="apply-button">Apply Preferences</button>
+    </div>
+    <div class="divider"></div>
 
-        <div class="footer-option">
-            <div class="footer-icon">
-                <svg class="icon" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M15 14V17.6C15 18.4401 15 18.8601 14.8365 19.181C14.6927 19.4632 14.4632 19.6927 14.181 19.8365C13.8601 20 13.4401 20 12.6 20H7.40001C6.55994 20 6.1399 20 5.81903 19.8365C5.53679 19.6927 5.30731 19.4632 5.1635 19.181C5.00001 18.8601 5.00001 18.4401 5.00001 17.6V10M19 10V20M5.00001 16H15M5.55778 4.88446L3.5789 8.84223C3.38722 9.22559 3.29138 9.41727 3.3144 9.57308C3.3345 9.70914 3.40976 9.8309 3.52246 9.90973C3.65153 10 3.86583 10 4.29444 10H19.7056C20.1342 10 20.3485 10 20.4776 9.90973C20.5903 9.8309 20.6655 9.70914 20.6856 9.57308C20.7086 9.41727 20.6128 9.22559 20.4211 8.84223L18.4422 4.88446C18.2817 4.5634 18.2014 4.40287 18.0817 4.28558C17.9758 4.18187 17.8482 4.10299 17.7081 4.05465C17.5496 4 17.3701 4 17.0112 4H6.98887C6.62991 4 6.45043 4 6.29198 4.05465C6.15185 4.10299 6.02422 4.18187 5.91833 4.28558C5.79858 4.40287 5.71832 4.5634 5.55778 4.88446Z" stroke="#737373" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
-            </div>
+    <div class="footer">
+      <div class="footer-option">
+        <div class="footer-icon">
+          <svg class="icon" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 12H18M12 6V18" stroke="#6f6f71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </div>
+        <span>Add Preference</span>
+      </div>
+      <div class="footer-option">
+        <div class="footer-icon">
+          <svg class="icon" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 14V17.6C15 18.4401 15 18.8601 14.8365 19.181C14.6927 19.4632 14.4632 19.6927 14.181 19.8365C13.8601 20 13.4401 20 12.6 20H7.40001C6.55994 20 6.1399 20 5.81903 19.8365C5.53679 19.6927 5.30731 19.4632 5.1635 19.181C5.00001 18.8601 5.00001 18.4401 5.00001 17.6V10M19 10V20M5.00001 16H15M5.55778 4.88446L3.5789 8.84223C3.38722 9.22559 3.29138 9.41727 3.3144 9.57308C3.3345 9.70914 3.40976 9.8309 3.52246 9.90973C3.65153 10 3.86583 10 4.29444 10H19.7056C20.1342 10 20.3485 10 20.4776 9.90973C20.5903 9.8309 20.6655 9.70914 20.6856 9.57308C20.7086 9.41727 20.6128 9.22559 20.4211 8.84223L18.4422 4.88446C18.2817 4.5634 18.2014 4.40287 18.0817 4.28558C17.9758 4.18187 17.8482 4.10299 17.7081 4.05465C17.5496 4 17.3701 4 17.0112 4H6.98887C6.62991 4 6.45043 4 6.29198 4.05465C6.15185 4.10299 6.02422 4.18187 5.91833 4.28558C5.79858 4.40287 5.71832 4.5634 5.55778 4.88446Z" stroke="#737373" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </div>
         <span>My E-Shop</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="popup-overlay" id="popup-overlay">
+    <div class="popup">
+      <div class="section">
+        <h2>Butter</h2>
+        <div class="product-list">
+          <div class="product">
+            <img src="https://via.placeholder.com/100" alt="Product Image">
+            <p>Weihenstephan Butter 250 g</p>
+            <p class="price">3,59 €</p>
+            <input type="checkbox" class="checkbox" checked>
+          </div>
+          <div class="product">
+            <img src="https://via.placeholder.com/100" alt="Product Image">
+            <p>Meggle Feine Butter 250 g</p>
+            <p class="price">3,59 €</p>
+            <input type="checkbox" class="checkbox">
+          </div>
+          <div class="product">
+            <img src="https://via.placeholder.com/100" alt="Product Image">
+            <p>Berchtesgadener Land Butter 250 g</p>
+            <p class="price">3,19 €</p>
+            <input type="checkbox" class="checkbox">
+          </div>
         </div>
       </div>
 
+      <div class="section">
+        <h2>Tomaten</h2>
+        <div class="product-list">
+          <div class="product">
+            <img src="https://via.placeholder.com/100" alt="Product Image">
+            <p>Cherry Rispentomaten, Bio Klasse II 350 g</p>
+            <p class="price">3,49 €</p>
+            <input type="checkbox" class="checkbox" checked>
+          </div>
+          <div class="product">
+            <img src="https://via.placeholder.com/100" alt="Product Image">
+            <p>Rispentomaten, Bio Klasse II 500 g</p>
+            <p class="price">2,79 €</p>
+            <input type="checkbox" class="checkbox">
+          </div>
+          <div class="product">
+            <img src="https://via.placeholder.com/100" alt="Product Image">
+            <p>Rispentomaten Klasse I 300 g</p>
+            <p class="price">3,49 €</p>
+            <input type="checkbox" class="checkbox">
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <script src="popup.js"></script>
-  </body>
+  <script>
+    function showPopup() {
+      document.getElementById("popup-overlay").style.display = "flex";
+    }
+
+    // Close popup when clicking outside
+    document.getElementById("popup-overlay").addEventListener("click", function(event) {
+      if (event.target === this) {
+        this.style.display = "none";
+      }
+    });
+  </script>
+</body>
 </html>
