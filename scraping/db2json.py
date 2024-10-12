@@ -5,21 +5,21 @@ db_path = 'data.db'
 conn = sqlite3.connect(db_path)
 cursor = conn.cursor()
 
-# Initialize
+# Init
 category_data = {}
 
 cursor.execute("SELECT product, name, weight, price, image_url FROM products")
 rows = cursor.fetchall()
 
-# Process each row in the result set
+# process each row in the result
 for row in rows:
     category, name, weight, price, image_url = row
 
-    # Initialize the category if it does not exist
+    # init the category
     if category not in category_data:
         category_data[category] = []
 
-    # Append product details to the category
+    # append more info
     category_data[category].append({
         "name": name,
         "weight": weight,
@@ -27,13 +27,12 @@ for row in rows:
         "image_url": image_url
     })
 
-# Close the database connection
+# close
 conn.close()
 
-# Convert the dictionary to a JSON string
+# convert the dictionary to a JSON string
 json_data = json.dumps(category_data, indent=4)
 
-# Save the JSON data to a file
 with open('data.json', 'w') as json_file:
     json_file.write(json_data)
 
