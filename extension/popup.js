@@ -102,20 +102,15 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 // Usage
-//document.getElementById('my-eshop').addEventListener('click', function() {
-//    openNewTab('shop.html');
-//});
-
-// Usage
-//document.getElementById('my-eshop').addEventListener('click', function() {
-//    openNewTab('shop.html');
-//});
+document.getElementById('my-eshop').addEventListener('click', function() {
+    openNewTab('shop.html');
+});
 
 
 
 // fix the tab to pop window
-document.getElementById("my-eshop").addEventListener("click", function(event) {
-    event.preventDefault(); // Prevents the default link behavior (opening in a new tab)
+//document.getElementById("my-eshop").addEventListener("click", function(event) {
+//    event.preventDefault(); // Prevents the default link behavior (opening in a new tab)
     
-    window.open("shop.html", "My E-Shop", "width=800,height=600,resizable=yes");
-});
+//    window.open("shop.html", "My E-Shop", "width=800,height=600,resizable=yes");
+//});
