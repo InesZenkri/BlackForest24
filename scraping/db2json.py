@@ -1,15 +1,13 @@
 import sqlite3
 import json
 
-# Connect to the database file
-db_path = 'data.db'  # Update with your database file path
+db_path = 'data.db'
 conn = sqlite3.connect(db_path)
 cursor = conn.cursor()
 
-# Initialize an empty dictionary to hold the structured data
+# Initialize
 category_data = {}
 
-# Query to select relevant columns from the products table
 cursor.execute("SELECT product, name, weight, price, image_url FROM products")
 rows = cursor.fetchall()
 

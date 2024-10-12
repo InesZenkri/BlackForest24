@@ -34,3 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => console.error('Error loading product data:', error));
 });
+
+document.getElementById('my-eshop').addEventListener('click', function() {
+    window.open('shop.html', 'My E-Shop', 'height=600,width=800');
+});
