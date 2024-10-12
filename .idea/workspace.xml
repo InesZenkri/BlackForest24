@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac8b8e07-f4c9-4240-ae82-4ca1861bfad1" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/extension/shop.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/extension/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/extension/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/extension/popup.js" beforeDir="false" afterPath="$PROJECT_DIR$/extension/popup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/extension/shop.html" beforeDir="false" afterPath="$PROJECT_DIR$/extension/shop.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/extension/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/extension/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

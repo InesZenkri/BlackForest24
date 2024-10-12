@@ -23,15 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
         chrome.storage.sync.set({ talahon: talahonCheckbox.checked });
     });
 
-    document.querySelector(".shop").addEventListener("click", () => {
-  chrome.windows.create({
-    url: "shop.html",
-    type: "popup",
-    width: 500,
-    height: 600
-  });
-});
-
     // Handle the "Apply Preferences" button
     document.getElementById('apply-button').addEventListener('click', () => {
         chrome.storage.sync.get(['bio', 'cheapest', 'talahon'], (result) => {
@@ -46,4 +37,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
   });
+
+    document.querySelector(".shop").addEventListener("click", () => {
+      chrome.windows.create({
+        url: "shop.html",
+        type: "popup",
+        width: 500,
+        height: 600
+      });
+    });
+
+
   

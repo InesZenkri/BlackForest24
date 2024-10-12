@@ -70,7 +70,6 @@ body {
     border-radius: 20px;
 }
 
-
 .slider:before {
     position: absolute;
     content: "";
@@ -129,8 +128,8 @@ button:hover {
     display: flex;
     align-items: center;
     cursor: pointer;
-    color: #4b4b4b; 
-    transition: color 0.3s ease; 
+    color: #4b4b4b;
+    transition: color 0.3s ease;
 }
 
 .footer-option:hover {
@@ -138,26 +137,31 @@ button:hover {
 }
 
 .footer-icon .icon {
-    width: 20px; 
-    height: 20px; 
-    stroke: currentColor; 
-    fill: none; 
-    transition: stroke 0.3s ease; 
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    fill: none;
+    transition: stroke 0.3s ease;
     margin:2px;
 }
 
-
 .icon path {
-    stroke: currentColor; 
+    stroke: currentColor;
 }
 
+/* Updated Shop Container Styling for Horizontal Layout */
 .shop-container {
   padding: 20px;
   background-color: #ffffff;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .category {
+  flex: 1 1 100%;
   margin-bottom: 20px;
+  overflow-x: auto; /* Allows horizontal scrolling for overflow */
+  white-space: nowrap; /* Keeps items in a single row */
 }
 
 .category h2 {
@@ -172,6 +176,7 @@ button:hover {
   margin-right: 10px;
   margin-bottom: 15px;
   text-align: center;
+  white-space: normal; /* Allows product details to wrap within each product */
 }
 
 .product img {
