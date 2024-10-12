@@ -1,0 +1,30 @@
+{
+  "id": "chatcmpl-AHVSUvbBMs9V6azgEGPVtgtWIsWAq",
+  "object": "chat.completion",
+  "created": 1728735866,
+  "model": "gpt-4-turbo-2024-04-09",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "- Margarine;350 g\n- Mehl;350 g\n- Zucker;350 g\n- Vanillezucker;1 Pck.\n- Backpulver;2 TL, gehäuft\n- Ei(er);6\n- Zitrone(n), unbehandelte;3\n- Puderzucker;300 g",
+        "refusal": null
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 11265,
+    "completion_tokens": 70,
+    "total_tokens": 11335,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "system_fingerprint": "fp_83975a045a"
+}

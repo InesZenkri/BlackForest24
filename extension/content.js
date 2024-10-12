@@ -19,3 +19,11 @@ chrome.runtime.sendMessage({ action: "getPreferences" }, (response) => {
         console.log("No preferences found.");
     }
 });
+
+
+window.addEventListener("load", () => {
+  if (document.body.innerText.includes("Rezept")) {
+      console.log("This page contains a recipe.");
+      queryGPT(document.body.innerText);
+  }
+});
