@@ -14,3 +14,39 @@
 .product {
   margin: 10px;
 }
+
+.product img {
+  width: 100px;
+  height: 100px;
+}
+
+.product h3 {
+  font-size: 16px;
+  margin: 5px;
+}
+
+.product p {
+  font-size: 14px;
+  margin: 5px;
+}
+
+.product input {
+  margin-top: 5px;
+}
+
+#add-to-cart {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+button {
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 20%;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}

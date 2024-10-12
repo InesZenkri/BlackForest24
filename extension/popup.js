@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Define your list of categories
+    const categoryList = ['milch'];
+
     // Fetch the data from the JSON file
     fetch('data.json')  // Adjust path if data.json is located elsewhere
         .then(response => response.json())
@@ -7,29 +10,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Loop over each category in the JSON data
             for (let category in data) {
-                const categoryDiv = document.createElement('div');
-                categoryDiv.className = 'category';
+                // Check if the category is in the list
+                if (categoryList.includes(category)) {
+                    const categoryDiv = document.createElement('div');
+                    categoryDiv.className = 'category';
 
-                const categoryTitle = document.createElement('h2');
-                categoryTitle.textContent = category.charAt(0).toUpperCase() + category.slice(1);
-                categoryDiv.appendChild(categoryTitle);
+                    const categoryTitle = document.createElement('h2');
+                    categoryTitle.textContent = category.charAt(0).toUpperCase() + category.slice(1);
+                    categoryDiv.appendChild(categoryTitle);
 
-                // Loop over the products in each category
-                data[category].forEach(product => {
-                    const productDiv = document.createElement('div');
-                    productDiv.className = 'product';
+                    // Loop over the products in each category
+                    data[category].forEach(product => {
+                        const productDiv = document.createElement('div');
+                        productDiv.className = 'product';
 
-                    productDiv.innerHTML = `
-                        <img src="${product.image_url}" alt="${product.name}">
-                        <p>${product.name}</p>
-                        <p>${product.weight}</p>
-                        <p>${product.price}</p>
-                        <input type="checkbox">
-                    `;
-                    categoryDiv.appendChild(productDiv);
-                });
+                        productDiv.innerHTML = `
+                            <img src="${product.image_url}" alt="${product.name}">
+                            <p>${product.name}</p>
+                            <p>${product.weight}</p>
+                            <p>${product.price}</p>
+                            <input type="checkbox">
+                        `;
+                        categoryDiv.appendChild(productDiv);
+                    });
 
-                shopContainer.appendChild(categoryDiv);
+                    shopContainer.appendChild(categoryDiv);
+                }
             }
         })
         .catch(error => console.error('Error loading product data:', error));
