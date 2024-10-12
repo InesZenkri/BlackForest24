@@ -150,3 +150,40 @@ button:hover {
 .icon path {
     stroke: currentColor; 
 }
+
+.shop-container {
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+.category {
+  margin-bottom: 20px;
+}
+
+.category h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.product {
+  display: inline-block;
+  width: 130px;
+  margin-right: 10px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.product img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.product p {
+  margin: 5px 0;
+}
+
+.product input {
+  margin-top: 5px;
+}
