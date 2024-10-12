@@ -2,62 +2,58 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
 import csv
-import json  # maybe i will switch to json 
-import re
-
+import re  
 
 driver = webdriver.Chrome()
 
-# just example of query  
 query = "milch"
-url = f"https://www.edeka24.de/#search:query={query}"
+url = f"https://ec-offenburg.edeka.shop/index.php?stoken=8268F7CC&lang=0&cl=search&searchparam={query}"
 driver.get(url)
 
 # Allow the page to load completely
-time.sleep(5)  
-
+time.sleep(2) 
 
 products = []
-product_elements = driver.find_elements(By.CLASS_NAME, "product-item") #let's hope they dont change the dis class name at last min XD
+product_elements = driver.find_elements(By.CLASS_NAME, "listDetails")
+image_elements = driver.find_elements(By.CLASS_NAME, "picture")
 
+# Check if the image container exists and extract the image URL
+if image_elements:
+    image_element = image_elements[0].find_element(By.TAG_NAME, "img")
+    image_url = image_element.get_attribute("src").strip()
 for product in product_elements:
-    name_element = product.find_element(By.CLASS_NAME, "title")
-    name = name_element.text.strip()
+    # Extract name and URL
+    name_element = product.find_element(By.CLASS_NAME, "title").find_element(By.TAG_NAME, "a")
+    full_name = name_element.text.strip()
     product_url = name_element.get_attribute("href").strip()
     
     # Extract price
-    price = product.find_element(By.CLASS_NAME, "price").text.strip()
+    price_element = product.find_element(By.CLASS_NAME, "price").find_element(By.CLASS_NAME, "article-price")
+    price = price_element.text.split('\n')[0].strip()  # Get the first line which is the price
 
-    # Extract weight from the name
-    match = re.search(r'(\d+)\s*(kg|g|KG|G|ml|ML|l|L)$', name)
-    
-    if match:
-        weight = match.group(1)  
-        unit = match.group(2)     
-        weight = f"{weight} {unit}"
-        
-        # remove the weight from the name
-        name = re.sub(r'(\d+)\s*(kg|g|KG|G|ml|ML|l|L)$', '', name).strip()
-    else:
-        weight = "N/A"
-
-    # check if the product is Bio
+    # Check if the product is Bio
     bio_elements = product.find_elements(By.CLASS_NAME, "bio")
     bio = "Bio" if bio_elements else "Non-Bio"
 
-    products.append([name, price, bio, weight, product_url])
+    # Use regex to separate name and weight (various units)
+    match = re.match(r'^(.*?)(\d+\s*(g|G|kg|KG|l|L|ml|ML))$', full_name)  # Capture name and weight with various units
+    if match:
+        name = match.group(1).strip()  
+        weight = match.group(2).strip() 
+    else:
+        name = full_name  
+        weight = ""  
 
-# for now save to CSV 
+    # Add data to the list
+    products.append([name, weight, price, bio, product_url, image_url])
+
+# Save to CSV
 with open('edeka_products.csv', 'w', newline='') as csvfile:
     writer = csv.writer(csvfile)
-    writer.writerow(['Name', 'Price', 'Bio Classification', 'Weight', 'Product URL'])
+    writer.writerow(['Name', 'Weight', 'Price', 'Bio Classification', 'Product URL', 'Image URL'])
     writer.writerows(products)
 
-# save data to JSON file (for the extension to read) still working on it, and for now still doenst work 
-with open('edeka_products.json', 'w') as jsonfile:
-    json.dump(products, jsonfile)
-
-# close the browser
+# Close the browser
 driver.quit()
 
-print("Data saved to edeka_products.csv and edeka_products.json")
+print("Data saved to edeka_products.csv")
