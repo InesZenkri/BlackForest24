@@ -1,23 +1,26 @@
 {
   "name": "EDEKA",
-  "description": "A simple helper extension for filling your card for EDEKA recipes.",
+  "description": "A simple helper extension for filling your cart with EDEKA recipes.",
   "version": "1.0",
   "manifest_version": 3,
   "action": {
     "default_popup": "hello.html",
     "default_icon": "edeka.png"
   },
-  "permissions": [
-    "storage",
-    "tabs"
-  ],
+  "permissions": ["storage", "tabs"],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
       "js": ["content.js"]
-    }],
-    "background": {
-  "service_worker": "background.js"
-}
-  
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["shop.html", "data.json"],
+      "matches": ["<all_urls>"]
+    }
+  ]
 }

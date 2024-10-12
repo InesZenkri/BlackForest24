@@ -70,7 +70,6 @@ body {
     border-radius: 20px;
 }
 
-
 .slider:before {
     position: absolute;
     content: "";
@@ -129,8 +128,8 @@ button:hover {
     display: flex;
     align-items: center;
     cursor: pointer;
-    color: #4b4b4b; 
-    transition: color 0.3s ease; 
+    color: #4b4b4b;
+    transition: color 0.3s ease;
 }
 
 .footer-option:hover {
@@ -138,15 +137,60 @@ button:hover {
 }
 
 .footer-icon .icon {
-    width: 20px; 
-    height: 20px; 
-    stroke: currentColor; 
-    fill: none; 
-    transition: stroke 0.3s ease; 
-    margin:2px;
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    fill: none;
+    transition: stroke 0.3s ease;
+    margin: 2px;
 }
 
-
 .icon path {
-    stroke: currentColor; 
+    stroke: currentColor;
+}
+
+/* make it cooler if u can */
+.shop-container {
+    padding: 20px;
+    background-color: #ffffff;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.category {
+    flex: 1 1 100%;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.category h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.product {
+    display: inline-block;
+    width: 130px;
+    margin-right: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+    white-space: normal;
+}
+
+.product img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
+.product p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.product input {
+    margin-top: 5px;
 }
