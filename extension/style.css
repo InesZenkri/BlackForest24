@@ -142,53 +142,55 @@ button:hover {
     stroke: currentColor;
     fill: none;
     transition: stroke 0.3s ease;
-    margin:2px;
+    margin: 2px;
 }
 
 .icon path {
     stroke: currentColor;
 }
 
-/* Updated Shop Container Styling for Horizontal Layout */
+/* Shop Container Styling */
 .shop-container {
-  padding: 20px;
-  background-color: #ffffff;
-  display: flex;
-  flex-wrap: wrap;
+    padding: 20px;
+    background-color: #ffffff;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .category {
-  flex: 1 1 100%;
-  margin-bottom: 20px;
-  overflow-x: auto; /* Allows horizontal scrolling for overflow */
-  white-space: nowrap; /* Keeps items in a single row */
+    flex: 1 1 100%;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    white-space: nowrap;
 }
 
 .category h2 {
-  font-size: 20px;
-  margin-bottom: 10px;
-  color: #333;
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #333;
 }
 
 .product {
-  display: inline-block;
-  width: 130px;
-  margin-right: 10px;
-  margin-bottom: 15px;
-  text-align: center;
-  white-space: normal; /* Allows product details to wrap within each product */
+    display: inline-block;
+    width: 130px;
+    margin-right: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+    white-space: normal;
 }
 
 .product img {
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
 }
 
 .product p {
-  margin: 5px 0;
+    margin: 5px 0;
+    font-size: 14px;
+    color: #555;
 }
 
 .product input {
-  margin-top: 5px;
+    margin-top: 5px;
 }

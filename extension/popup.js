@@ -1,51 +1,36 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const bioCheckbox = document.getElementById('bio-products');
-    const cheapestCheckbox = document.getElementById('cheapest-products');
-    const talahonCheckbox = document.getElementById('talahon-products');
-  
-    // Retrieve stored preferences
-    chrome.storage.sync.get(['bio', 'cheapest', 'talahon'], (result) => {
-        bioCheckbox.checked = result.bio || false; // Default to false if not set
-        cheapestCheckbox.checked = result.cheapest || false;
-        talahonCheckbox.checked = result.talahon || false; // Fixed the property name
-    });
-  
-    // Save preferences when toggled
-    bioCheckbox.addEventListener('change', () => {
-        chrome.storage.sync.set({ bio: bioCheckbox.checked });
-    });
-  
-    cheapestCheckbox.addEventListener('change', () => {
-        chrome.storage.sync.set({ cheapest: cheapestCheckbox.checked });
-    });
-  
-    talahonCheckbox.addEventListener('change', () => { 
-        chrome.storage.sync.set({ talahon: talahonCheckbox.checked });
-    });
+    // Fetch the data from the JSON file
+    fetch('data.json')  // Adjust path if data.json is located elsewhere
+        .then(response => response.json())
+        .then(data => {
+            const shopContainer = document.querySelector('.shop-container');
 
-    // Handle the "Apply Preferences" button
-    document.getElementById('apply-button').addEventListener('click', () => {
-        chrome.storage.sync.get(['bio', 'cheapest', 'talahon'], (result) => {
-            const preferences = {
-                bio: result.bio,
-                cheapest: result.cheapest,
-                talahon: result.talahon,
-            };
-  
-            // Send preferences to the background script
-            chrome.runtime.sendMessage({ action: "savePreferences", preferences: preferences });
-        });
-    });
-  });
+            // Loop over each category in the JSON data
+            for (let category in data) {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'category';
 
-    document.querySelector(".shop").addEventListener("click", () => {
-      chrome.windows.create({
-        url: "shop.html",
-        type: "popup",
-        width: 500,
-        height: 600
-      });
-    });
+                const categoryTitle = document.createElement('h2');
+                categoryTitle.textContent = category.charAt(0).toUpperCase() + category.slice(1);
+                categoryDiv.appendChild(categoryTitle);
 
+                // Loop over the products in each category
+                data[category].forEach(product => {
+                    const productDiv = document.createElement('div');
+                    productDiv.className = 'product';
 
-  
+                    productDiv.innerHTML = `
+                        <img src="${product.image_url}" alt="${product.name}">
+                        <p>${product.name}</p>
+                        <p>${product.weight}</p>
+                        <p>${product.price}</p>
+                        <input type="checkbox">
+                    `;
+                    categoryDiv.appendChild(productDiv);
+                });
+
+                shopContainer.appendChild(categoryDiv);
+            }
+        })
+        .catch(error => console.error('Error loading product data:', error));
+});

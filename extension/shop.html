@@ -5,74 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My E-Shop</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-    .shop-container {
-      width: 100vw;
-      height: 100vh;
-      padding: 20px;
-      background-color: #ffffff;
-      display: flex;
-      flex-wrap: wrap;
-    }
-
-    .category {
-      flex: 1 1 100%;
-      width: 100%;
-      margin-bottom: 20px;
-      overflow-x: auto;
-      white-space: nowrap;
-    }
-
-    .product {
-      display: inline-block;
-      width: 20vw; /* Adjust to fit multiple products across the view */
-      margin-right: 10px;
-      margin-bottom: 15px;
-      text-align: center;
-      white-space: normal;
-    }
-
-    .product img {
-      width: 18vw;
-      height: 18vw;
-      object-fit: contain;
-    }
-  </style>
 </head>
 <body>
   <div class="shop-container">
-    <div class="category">
-      <h2>Butter</h2>
-      <div class="product">
-        <img src="butter1.jpg" alt="Weihenstephan Butter 250 g">
-        <p>Weihenstephan Butter 250 g</p>
-        <p>3,59 €</p>
-        <input type="checkbox">
-      </div>
-      <div class="product">
-        <img src="butter2.jpg" alt="Meggle Feine Butter 250 g">
-        <p>Meggle Feine Butter 250 g</p>
-        <p>3,59 €</p>
-        <input type="checkbox">
-      </div>
-      <!-- Add other butter products similarly -->
-    </div>
-    <div class="category">
-      <h2>Tomaten</h2>
-      <div class="product">
-        <img src="tomato1.jpg" alt="Cherry Rispentomaten">
-        <p>Cherry Rispentomaten, Bio Klasse II 350g</p>
-        <p>3,49 €</p>
-        <input type="checkbox">
-      </div>
-      <div class="product">
-        <img src="tomato2.jpg" alt="Rispentomaten">
-        <p>Rispentomaten, Bio Klasse II 500g</p>
-        <p>2,79 €</p>
-        <input type="checkbox">
-      </div>
-      <!-- Add other tomato products similarly -->
-    </div>
+    <!-- This is where the dynamically loaded product categories and items will appear -->
   </div>
+
+  <script src="popup.js"></script>
 </body>
 </html>
