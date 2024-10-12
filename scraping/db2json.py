@@ -1,7 +1,7 @@
 import sqlite3
 import json
 
-db_path = 'data.db'
+db_path = 'database.db'
 conn = sqlite3.connect(db_path)
 cursor = conn.cursor()
 
@@ -33,7 +33,7 @@ conn.close()
 # convert the dictionary to a JSON string
 json_data = json.dumps(category_data, indent=4)
 
-with open('data.json', 'w') as json_file:
+with open('../extension/data.json', 'w') as json_file:
     json_file.write(json_data)
 
 print("Data has been converted to JSON and saved as data.json")

@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Interface for you: combine recipe list from GPT here, we will search it from our database
     // when class not there we will have problem lol (no robustness optimization right now)
-    const categoryList = ['milch'];
+    const categoryList = [' Sahne', ' Milch'];
 
     // Fetch the data from the JSON file
     fetch('data.json')
