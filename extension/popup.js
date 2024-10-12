@@ -1,9 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Define your list of categories
+    // Interface for you: combine recipe list from GPT here, we will search it from our database
+    // when class not there we will have problem lol (no robustness optimization right now)
     const categoryList = ['milch'];
 
     // Fetch the data from the JSON file
-    fetch('data.json')  // Adjust path if data.json is located elsewhere
+    fetch('data.json')
         .then(response => response.json())
         .then(data => {
             const shopContainer = document.querySelector('.shop-container');
