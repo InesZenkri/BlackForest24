@@ -38,3 +38,23 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         return true; 
     }
 });
+
+// background.js
+
+let shopContent = '';
+
+// Listener für Nachrichten aus dem Content Script
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if (request.action === 'sendShopContent') {
+        shopContent = request.data;
+        console.log("Received shop content:", shopContent);
+        sendResponse({ success: true });
+    }
+});
+
+// Wenn die Warenkorb-Seite geladen wird, sende den shop-container-Inhalt
+chrome.webNavigation.onCompleted.addListener((details) => {
+    if (details.url.includes("https://ec-offenburg.edeka.shop/warenkorb/")) {
+        chrome.tabs.sendMessage(details.tabId, { action: "receiveShopContent", data: shopContent });
+    }
+}, { url: [{ hostContains: 'ec-offenburg.edeka.shop' }] });

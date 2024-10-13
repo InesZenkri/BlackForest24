@@ -24,7 +24,7 @@ window.addEventListener('DOMContentLoaded', async () => {
             //     console.log(ingredientList[item].name);
             // }
             // Fetch the data from the JSON file
-            fetch('data.json')
+            fetch('data2.json')
                 .then(response => response.json())
                 .then(data => {
                     const shopContainer = document.querySelector('.shop-container');
@@ -36,7 +36,9 @@ window.addEventListener('DOMContentLoaded', async () => {
                         for (let category in data) {
                             for (let product in data[category]) {
                                 if (data[category][product].name.includes(ingredientList[item].name)) {
-                                    relevant_products.push(data[category][product]);
+				    const p = data[category][product];
+				    p["id"] = category;
+                                    relevant_products.push(p);
                                 }
                             }
                         }
@@ -63,7 +65,9 @@ window.addEventListener('DOMContentLoaded', async () => {
                             <p>${product.name}</p>
                             <p>${product.weight}</p>
                             <p>${product.price}</p>
-                            <input type="checkbox">
+                            <p hidden>${product.id}</p>
+        			<input type="checkbox" class="product-checkbox" data-id="${product.id}">
+
                         `;
                                 categoryDiv.appendChild(productDiv);
                             });
@@ -77,6 +81,52 @@ window.addEventListener('DOMContentLoaded', async () => {
             console.log("ingredientList not found in storage.");
         }
     });
+    // Event Listener für den "add-to-cart"-Button
+    const addToCartButton = document.getElementById('add-to-cart');
+    if (addToCartButton) {
+        addToCartButton.addEventListener('click', function () {
+
+		// Suche nach allen Checkboxen innerhalb von .shop-container, die gecheckt sind
+    const selectedCheckboxes = document.querySelectorAll('.product-checkbox:checked');
+    const selectedIds = [];
+
+    // Iteriere durch alle ausgewählten Checkboxen und sammle die IDs
+    selectedCheckboxes.forEach(checkbox => {
+        selectedIds.push(checkbox.getAttribute('data-id'));
+    });
+if (selectedIds.length > 0) {
+console.log("selectedIds: ",selectedIds);
+}
+
+            // Greife auf den Inhalt des shop-container der aktuellen Seite zu
+            const shopContainerContent = selectedIds;
+
+
+                        // Sende den Inhalt des shop-container an das Background Script
+
+            chrome.runtime.sendMessage({ action: "sendShopContent", data: shopContainerContent }, (response) => {
+
+                if (response.success) {
+
+                    console.log("Shop content sent successfully.");
+
+                    // Öffne die Warenkorb-Seite
+
+                    window.open('https://ec-offenburg.edeka.shop/warenkorb/', '_blank');
+
+                } else {
+
+                    console.error("Failed to send shop content.");
+
+                }
+
+            });
+
+
+        });
+    } else {
+        console.error('Button "add-to-cart" not found.');
+    }
 
 });
 
