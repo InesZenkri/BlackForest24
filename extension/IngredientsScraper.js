@@ -12,6 +12,68 @@ function parseIngredientsList(input) {
   return ingredients;
 }
 
+// Utility function to convert chrome.storage.sync.get to a promise
+function getPreferences() {
+    return new Promise((resolve) => {
+        chrome.storage.sync.get(['bio', 'cheapest', 'talahon', 'customPreferences'], (result) => {
+            const preferences = {
+                bio: result.bio || false,
+                cheapest: result.cheapest || false,
+                talahon: result.talahon || false,
+            };
+            resolve(preferences);
+        });
+    });
+}
+
+async function getRecipe(recipe) {
+    try {
+        const url = chrome.runtime.getURL('data2.json');
+        const response = await fetch(url);
+        const data = await response.json();
+        const finalList = [];
+
+        // Wait for preferences to load from storage
+        const preferences = await getPreferences();
+        console.log(preferences);
+
+        // Loop over each item in ingredientList
+        for (let item of recipe) {
+            const relevant_products = [];
+
+            // Loop over each category in the JSON data
+            for (let category in data) {
+                for (let product in data[category]) {
+                    // Check if the product name includes the ingredient name
+                    if (data[category][product].name.includes(item.name)) {
+                        relevant_products.push(data[category][product]);
+                    }
+                }
+            }
+
+            // Use preferences in askGPT call
+            const index_ = await askGPT(JSON.stringify(recipe), JSON.stringify(preferences), JSON.stringify(relevant_products));
+
+            if (index_) {
+                const indexes = index_.split('\n').map(index => parseInt(index, 10));
+                finalList.push({
+                    item: item,
+                    relevant_products: indexes.map(index => relevant_products[index]),
+                });
+            }
+        }
+
+        // Save the final list to local storage
+        chrome.storage.local.set({ finalList }, () => {
+            console.log("ingredientList saved to storage.");
+        });
+
+    } catch (error) {
+        console.error('Error fetching or processing data:', error);
+    }
+}
+
+
 function parseIngredient(line) {
   // Regular expression to match product, quantity, optional unit, and optional details
   const regex = /^-\s*(.+?)(?:,\s*(.+?))?;\s*(\d+)\s*([^\s,]+)?(?:,\s*(.+))?$/;
@@ -75,9 +137,7 @@ async function queryGPT(prompt) {
     const answer = response.data;
     console.log(answer.choices[0].message.content);
     const ingredientList = JSON.parse(answer.choices[0].message.content);
-    chrome.storage.local.set({ ingredientList }, () => {
-      console.log("ingredientList saved to storage.");
-    });
+    getRecipe(ingredientList);
     // chrome.storage.local.set({ ingredientList: JSON.parse(answer.choices[0].message.content)});
     // localStorage.setItem("ingredientList", answer.choices[0].message.content);
     // console.log(localStorage.getItem("ingredientList"));
@@ -110,7 +170,7 @@ async function askGPT(recipe, preferences, prompt) {
     );
     // Extract and log the response data
     const answer = response.data;
-    console.log(answer.choices[0].message.content);
+    // console.log(answer.choices[0].message.content);
     return answer.choices[0].message.content;
   } catch (error) {
     console.error('Error querying GPT:', error.response?.data || error.message);

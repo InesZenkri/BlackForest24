@@ -20,7 +20,7 @@
   },
   "web_accessible_resources": [
     {
-      "resources": ["shop.html", "data.json"],
+      "resources": ["shop.html", "data2.json"],
       "matches": ["<all_urls>"]
     }
   ]
